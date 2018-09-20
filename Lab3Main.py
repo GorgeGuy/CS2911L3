@@ -27,7 +27,9 @@ def get_file_name():
     Prompts the user for the name of a file they would like to write the results to.
     :return: The full path of the file they are trying to write to
     """
-    return ""
+    file_name = input("Please enter the name of the file you would like to write to: ")
+    return file_name
+
 
 def print_to_file(list_of_lines, file_path):
     """
@@ -37,7 +39,8 @@ def print_to_file(list_of_lines, file_path):
     :param file_path:  The full path that points to the file to which we will write
     :return: None
     """
-
+    with open(file_path) as output_file:
+        writeLines(list_of_lines, output_file)
 
 def read_message(message):
     """
@@ -79,3 +82,13 @@ def read_next_line(message):
         found_line += current_byte
         current_byte = message.next_byte()
     return found_line
+
+def writeLines(list_of_linse, file):
+    """
+    Writes the list_of_lines to the given file.
+    :param list_of_linse: The lines to be added to the file
+    :param file: The file to which we will write
+    :return: None
+    """
+    for i in range(0, len(list_of_linse)):
+        file.write(list_of_linse[i] + "\n")
