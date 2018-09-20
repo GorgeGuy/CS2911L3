@@ -1,5 +1,15 @@
-<<<<<<< HEAD
+"""
+- CS2911 - 021
+- Fall 2018
+- Lab 3 - Parser Design
+- Names:
+  - Joshua Spleas
+  - Seth Fenske
 
+    A data parser for an imaginary message format
+"""
+
+from CS2911L3.Message import Message
 
 def print_to_file(list_of_lines, file):
     """
@@ -17,31 +27,19 @@ def get_file_name():
     Prompts the user for the name of a file they would like to write the results to.
     :return: The full path of the file they are trying to write to
     """
-    return ""
+    file_name = input("Please enter the name of the file you would like to write to: ")
+    return file_name
 
 def print_to_file(list_of_lines, file_path):
     """
     Prints the message cointainted in list_of_lines to the file at the specified path.
-    
+
     :param list_of_lines: A list containing each line of text to write to the file as a respecstive entry.
     :param file_path:  The full path that points to the file to which we will write
     :return: None
     """
-=======
-"""
-- CS2911 - 021
-- Fall 2018
-- Lab 3 - Parser Design
-- Names:
-  - Joshua Spleas
-  - Seth Fenske
-
-    A data parser for an imaginary message format
-"""
-
-from CS2911L3.Message import Message
-
-
+    with open(file_path) as output_file:
+        writeLines(list_of_lines, output_file)
 
 
 def read_message(message):
@@ -72,4 +70,13 @@ def read_next_line(message):
     """
 
     return b''
->>>>>>> 49c888a6b6d4e51907797dc5f2d7eedcad7ab6de
+
+def writeLines(list_of_linse, file):
+    """
+    Writes the list_of_lines to the given file.
+    :param list_of_linse: The lines to be added to the file
+    :param file: The file to which we will write
+    :return: None
+    """
+    for i in range(0, len(list_of_linse)):
+        file.write(list_of_linse[i] + "\n")
