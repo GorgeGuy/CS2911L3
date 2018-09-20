@@ -1,5 +1,15 @@
-<<<<<<< HEAD
+"""
+- CS2911 - 021
+- Fall 2018
+- Lab 3 - Parser Design
+- Names:
+  - Joshua Spleas
+  - Seth Fenske
 
+    A data parser for an imaginary message format
+"""
+
+from CS2911L3.Message import Message
 
 def print_to_file(list_of_lines, file):
     """
@@ -22,26 +32,11 @@ def get_file_name():
 def print_to_file(list_of_lines, file_path):
     """
     Prints the message cointainted in list_of_lines to the file at the specified path.
-    
+
     :param list_of_lines: A list containing each line of text to write to the file as a respecstive entry.
     :param file_path:  The full path that points to the file to which we will write
     :return: None
     """
-=======
-"""
-- CS2911 - 021
-- Fall 2018
-- Lab 3 - Parser Design
-- Names:
-  - Joshua Spleas
-  - Seth Fenske
-
-    A data parser for an imaginary message format
-"""
-
-from CS2911L3.Message import Message
-
-
 
 
 def read_message(message):
@@ -72,4 +67,3 @@ def read_next_line(message):
     """
 
     return b''
->>>>>>> 49c888a6b6d4e51907797dc5f2d7eedcad7ab6de
