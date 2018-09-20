@@ -92,3 +92,17 @@ def writeLines(list_of_linse, file):
     """
     for i in range(0, len(list_of_linse)):
         file.write(list_of_linse[i] + "\n")
+
+def main():
+    message = Message(b'\x00\x00\x00\x05'
+                      b'This is a test message\x0a'
+                      b'This is a second line\x0a'
+                      b'\x0a'
+                      b'\x0a'
+                      b'This is a line after 2 were skipped\x0a')
+    lines = read_message(message)
+    #TODO add file writing and remove print
+    for i in lines:
+        print(i)
+
+main()

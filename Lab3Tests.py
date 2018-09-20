@@ -16,4 +16,20 @@ def message_test():
         print(i.decode("ASCII"))
 
 
+def empty_test():
+    message_bytes = b'\x00\x00\x00\x00'
+    test_message = Message(message_bytes)
+    lines = read_message(test_message)
+    for i in lines:
+        print(i.decode("ASCII"))
+
+
+print("Testing parsing given message:")
+print("-----------------------------")
 message_test()
+print("-----------------------------\n")
+
+print("Testing with message size 0:")
+print("-----------------------------")
+empty_test()
+print("-----------------------------\n")
