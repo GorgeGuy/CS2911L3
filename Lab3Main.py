@@ -30,6 +30,7 @@ def get_file_name():
     file_name = input("Please enter the name of the file you would like to write to: ")
     return file_name
 
+
 def print_to_file(list_of_lines, file_path):
     """
     Prints the message cointainted in list_of_lines to the file at the specified path.
@@ -41,7 +42,6 @@ def print_to_file(list_of_lines, file_path):
     with open(file_path) as output_file:
         writeLines(list_of_lines, output_file)
 
-
 def read_message(message):
     """
     Reads the passed message to a list of bytes
@@ -50,26 +50,38 @@ def read_message(message):
     :return: list of bytes where each element is a line from the file
     :author: Joshua Spleas
     """
+    found_lines = list()
+    num_lines = read_num_lines(message)
+    for i in range(0,num_lines):
+        found_lines.append(read_next_line(message))
 
-    return list()
+    return found_lines
 
 def read_num_lines(message):
     """
     Reads four bytes from the message as a single integer value
     :param message: the message to read from
     :return: the number of lines
+    :author: Joshua Spleas
     """
-
-    return 0
+    size_bytes = b''
+    for i in range(0, 4):
+        size_bytes += message.next_byte()
+    return int.from_bytes(size_bytes, 'big')
 
 def read_next_line(message):
     """
     Reads bytes from a message until a newline (0x0a) byte is read
     :param message: message to read from
     :return: a byte string for the line, not including any newline characters
+    :author: Joshua Spleas
     """
-
-    return b''
+    current_byte = message.next_byte()
+    found_line = b''
+    while current_byte != b'\x0a':
+        found_line += current_byte
+        current_byte = message.next_byte()
+    return found_line
 
 def writeLines(list_of_linse, file):
     """
