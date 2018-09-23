@@ -72,26 +72,27 @@ def read_next_line(message):
         current_byte = message.next_byte()
     return found_line
 
-def write_lines(list_of_linse, file):
+def write_lines(list_of_lines, file):
     """
     Writes the list_of_lines to the given file.
-    :param list_of_linse: The lines to be added to the file
+    :param list_of_lines: The lines to be added to the file
     :param file: The file to which we will write
     :return: None
     """
-    for i in range(0, len(list_of_linse)):
-        file.write(list_of_linse[i] + "\n")
+    for i in range(0, len(list_of_lines)):
+        file.write(list_of_lines[i] + b"\n")
 
 def main():
-    message = Message(b'\x00\x00\x00\x05'
+    message = Message(b'\x00\x00\x00\x06'
                       b'This is a test message\x0a'
                       b'This is a second line\x0a'
                       b'\x0a'
                       b'\x0a'
                       b'This is a line after 2 were skipped\x0a')
     lines = read_message(message)
-    #TODO add file writing and remove print
-    for i in lines:
-        print(i)
+    file_name = get_file_name()
+
+    with open(file_name, "wb") as file:
+        write_lines(lines, file)
 
 main()
