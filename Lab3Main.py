@@ -18,6 +18,7 @@ def print_to_file(list_of_lines, file_path):
     :param list_of_lines: A list containing each line of text to write to the file as a respecstive entry.
     :param file_path:  The full path that points to the file to which we will write
     :return: None
+    :author: Seth Fenske
     """
     with open(file_path) as output_file:
         write_lines(list_of_lines, output_file)
@@ -26,6 +27,7 @@ def get_file_name():
     """
     Prompts the user for the name of a file they would like to write the results to.
     :return: The full path of the file they are trying to write to
+    :author: Seth Fenske
     """
     file_name = input("Please enter the name of the file you would like to write to: ")
     return file_name
@@ -78,11 +80,17 @@ def write_lines(list_of_lines, file):
     :param list_of_lines: The lines to be added to the file
     :param file: The file to which we will write
     :return: None
+    :author: Seth Fenske
     """
     for i in range(0, len(list_of_lines)):
         file.write(list_of_lines[i] + b"\n")
 
 def main():
+    """
+    Main method for the program, reads a premade message and writes to
+    a user specified file
+    :return: None
+    """
     message = Message(b'\x00\x00\x00\x05'
                       b'This is a test message\x0a'
                       b'This is a second line\x0a'
