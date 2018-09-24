@@ -83,7 +83,7 @@ def write_lines(list_of_lines, file):
         file.write(list_of_lines[i] + b"\n")
 
 def main():
-    message = Message(b'\x00\x00\x00\x06'
+    message = Message(b'\x00\x00\x00\x05'
                       b'This is a test message\x0a'
                       b'This is a second line\x0a'
                       b'\x0a'
