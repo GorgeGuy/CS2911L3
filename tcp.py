@@ -25,7 +25,7 @@ import sys
 
 # Port number definitions
 # (May have to be adjusted if they collide with ports in use by other programs/services.)
-TCP_PORT = 12100
+TCP_PORT = 121
 
 # Address to listen on when acting as server.
 # The address '' means accept any connection for our 'receive' port from any network interface
@@ -36,7 +36,7 @@ LISTEN_ON_INTERFACE = ''
 # When connecting on one system, use 'localhost'
 # When 'sending' to another system, use its IP address (or DNS name if it has one)
 # OTHER_HOST = '155.92.x.x'
-OTHER_HOST = 'localhost'
+OTHER_HOST = '192.161.1.104'
 
 
 def main():
@@ -134,15 +134,18 @@ def tcp_receive(listen_port):
     data_socket.close()
 
 
-def init_setver(listen_port):
+def init_setver(host, listen_port, backlog):
     """
     Creates a new socket to listen for messages.
+    :param host The ip address of the host
     :param listen_port: The port that you want the socket to listen on
+    :backlog THe number of queued connections that can be made at one time
     :author: Seth Fenske
     :return: The TCP socket recieving the data
     """
-    tcp_server = socket.socket(listen_port, socket.SOCK_STREAM)
-    tcp_server.bind(listen_port)
+    tcp_server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    tcp_server.bind(host, listen_port)
+    tcp_server.listen(backlog)
     return tcp_server
 
 def handle_messages(data_socket):
