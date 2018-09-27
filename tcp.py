@@ -135,6 +135,12 @@ def tcp_receive(listen_port):
 
 
 def init_setver(listen_port):
+    """
+    Creates a new socket to listen for messages.
+    :param listen_port: The port that you want the socket to listen on
+    :author: Seth Fenske
+    :return: The TCP socket recieving the data
+    """
     tcp_server = socket.socket(listen_port, socket.SOCK_STREAM)
     tcp_server.bind(listen_port)
     return tcp_server
