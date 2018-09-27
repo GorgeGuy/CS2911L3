@@ -127,14 +127,17 @@ def tcp_receive(listen_port):
     print('tcp_receive (server): listen_port={0}'.format(listen_port))
     # Replace this comment with your code.
 
-    data_socket = init_setver(listen_port)
+    server = init_server(listen_port)
+
+    data_socket, address = server.accept()
+    print("Connection from: " + str(address))
 
     handle_messages(data_socket)
 
     data_socket.close()
 
 
-def init_setver(host, listen_port, backlog):
+def init_server(host, listen_port, backlog):
     """
     Creates a new socket to listen for messages.
     :param host The ip address of the host
