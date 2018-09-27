@@ -141,6 +141,7 @@ def init_server(host, listen_port, backlog):
     Creates a new socket to listen for messages.
     :param host The ip address of the host
     :param listen_port: The port that you want the socket to listen on
+    :param backlog the number of connections to allow
     :backlog THe number of queued connections that can be made at one time
     :author: Seth Fenske
     :return: The TCP socket recieving the data
@@ -149,6 +150,7 @@ def init_server(host, listen_port, backlog):
     tcp_server.bind((host, listen_port))
     tcp_server.listen(backlog)
     return tcp_server
+
 
 def handle_messages(data_socket):
     """
@@ -173,7 +175,6 @@ def handle_messages(data_socket):
     data_socket.sendall(b'Q')
 
 
-
 def next_byte(data_socket):
     """
     Read the next byte from the socket data_socket.
@@ -190,6 +191,7 @@ def next_byte(data_socket):
     """
     return data_socket.recv(1)
 
+
 def print_to_file(list_of_lines, file_path):
     """
     Prints the message cointainted in list_of_lines to the file at the specified path.
@@ -202,35 +204,27 @@ def print_to_file(list_of_lines, file_path):
     with open(file_path) as output_file:
         write_lines(list_of_lines, output_file)
 
-def get_file_name():
-    """
-    Prompts the user for the name of a file they would like to write the results to.
-    :return: The full path of the file they are trying to write to
-    :author: Seth Fenske
-    """
-    file_name = input("Please enter the name of the file you would like to write to: ")
-    return file_name
-
 
 def read_message(data_socket):
     """
     Reads the passed message to a list of bytes
 
-    :param message: the message object implementing the next_byte method
+    :param data_socket: the message object implementing the next_byte method
     :return: list of bytes where each element is a line from the file
     :author: Joshua Spleas
     """
     found_lines = list()
     num_lines = read_num_lines(data_socket)
-    for i in range(0,num_lines):
+    for i in range(0, num_lines):
         found_lines.append(read_next_line(data_socket))
 
     return found_lines
 
+
 def read_num_lines(data_socket):
     """
     Reads four bytes from the message as a single integer value
-    :param message: the message to read from
+    :param data_socket: the message to read from
     :return: the number of lines
     :author: Joshua Spleas
     """
@@ -239,10 +233,11 @@ def read_num_lines(data_socket):
         size_bytes += next_byte(data_socket)
     return int.from_bytes(size_bytes, 'big')
 
+
 def read_next_line(data_socket):
     """
     Reads bytes from a message until a newline (0x0a) byte is read
-    :param message: message to read from
+    :param data_socket: message to read from
     :return: a byte string for the line, not including any newline characters
     :author: Joshua Spleas
     """
@@ -252,6 +247,7 @@ def read_next_line(data_socket):
         found_line += current_byte
         current_byte = next_byte(data_socket)
     return found_line
+
 
 def write_lines(list_of_lines, file):
     """
