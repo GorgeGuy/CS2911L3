@@ -138,7 +138,26 @@ def init_setver(listen_port):
     return
 
 def handle_messages(data_socket):
-    return
+    """
+    Method to handle reading messages from a client
+    After every message is received, an 'A' byte is sent and a file is saved
+    After an empty message is received, a 'Q' byte is sent
+    :param data_socket: active tcp socket to recieve/send from
+    :return: None
+    """
+    size = 1
+    message_number = 1
+    while size != 0:
+        lines = read_message(data_socket)
+        size = len(lines)
+        if size != 0:
+            file_name = str(message_number) + ".txt"
+            message_number += 1
+            with open(file_name, "wb") as file:
+                write_lines(lines, file)
+            data_socket.sendall(b'A')
+    data_socket.sendall(b'Q')
+
 
 
 def next_byte(data_socket):
