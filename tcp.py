@@ -127,7 +127,7 @@ def tcp_receive(listen_port):
     print('tcp_receive (server): listen_port={0}'.format(listen_port))
     # Replace this comment with your code.
 
-    data_socket = init_setver()
+    data_socket = init_setver(listen_port)
 
     handle_messages(data_socket)
 
@@ -155,6 +155,7 @@ def handle_messages(data_socket):
     After an empty message is received, a 'Q' byte is sent
     :param data_socket: active tcp socket to recieve/send from
     :return: None
+    :author: Joshua Spleas
     """
     size = 1
     message_number = 1
