@@ -22,7 +22,6 @@ import socket
 import struct
 import time
 import sys
-from CS2911L3.Lab3Main import *
 
 # Port number definitions
 # (May have to be adjusted if they collide with ports in use by other programs/services.)
