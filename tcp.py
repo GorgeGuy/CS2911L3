@@ -135,7 +135,9 @@ def tcp_receive(listen_port):
 
 
 def init_setver(listen_port):
-    return
+    tcp_server = socket.socket(listen_port, socket.SOCK_STREAM)
+    tcp_server.bind(listen_port)
+    return tcp_server
 
 def handle_messages(data_socket):
     return
